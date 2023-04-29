@@ -7,8 +7,9 @@ console.log('hello');
 function App() {
   return (
     <div className="app">
+      <h1>Testowa zmiana</h1>
       <header className="app-header">
-        <img src={logo} className="app-logo" alt="logo"    />
+        <img src={logo} className="app-logo" alt="logo"/>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
