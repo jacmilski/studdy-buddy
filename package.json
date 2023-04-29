@@ -11,14 +11,6 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": ["prettier --write . && git add -A .", "lint-staged"]
-    }
-  },
-  "lint-staged": {
-    "*": "prettier --write"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
