@@ -2,12 +2,12 @@ import React from 'react';
 import logo from 'assets/logo.svg';
 import 'views/App.css';
 
-console.log('hello');
+console.log("hello");
 
 function App() {
   return (
     <div className="app">
-      <h1>Testowa zmiana</h1>
+      <h1>Testowa zmiana 2</h1>
       <header className="app-header">
         <img src={logo} className="app-logo" alt="logo"/>
         <p>

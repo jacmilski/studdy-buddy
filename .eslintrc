@@ -2,8 +2,7 @@
     "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended", "prettier", "eslint:recommended"],
     "plugins": ["prettier", "react"],
     "rules": {
-        "prettier/prettier": ["error", { "singleQuote": true }],
-        "import/first": 1
+        "prettier/prettier": ["error", { "singleQuote": true }]
     },
     "env": {
         "browser": true,
