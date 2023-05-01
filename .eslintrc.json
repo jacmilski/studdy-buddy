@@ -4,13 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": [
-    "react-app",
-    "react-app/jest",
-    "plugin:react/recommended",
-    "airbnb",
-    "prettier"
-  ],
+  "extends": ["react-app", "react-app/jest", "plugin:react/recommended", "airbnb", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -22,6 +16,9 @@
     "import/no-unresolved": "off",
     "no-console": "off",
     "react/jsx-no-useless-fragment": "off",
-    "import/no-extraneous-dependencies": ["error", { "includeInternal": false }]
+    "import/no-extraneous-dependencies": "off",
+    "react/prop-types": "warn",
+    "import/prefer-default-export": "off",
+    "no-nested-ternary": "warn"
   }
 }

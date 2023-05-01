@@ -2,7 +2,7 @@ const users = [
   {
     name: 'Adam Romański',
     attendance: '38%',
-    average: 2.3,
+    average: 1.5,
   },
   {
     name: 'Krzysztof Batko',
