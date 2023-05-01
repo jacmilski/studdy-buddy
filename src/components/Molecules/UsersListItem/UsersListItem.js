@@ -5,16 +5,12 @@ import AverageBadge from 'components/Atoms/AverageBadge/AverageBadge';
 import TextBox from 'components/Atoms/TextBox/TextBox';
 import { Wrapper } from './UsersListItem.styles';
 
-const showIndexOfStudent = (index) => {
-  alert(`This is student with index ${index + 1}`);
-};
-
-function UsersListItem({ index, userData: { name, attendance = '0%', average } }) {
+function UsersListItem({ deleteUser, userData: { name, attendance = '0%', average } }) {
   return (
     <Wrapper>
       <AverageBadge score={average} />
       <TextBox name={name} attendance={attendance} />
-      <Button onClick={() => showIndexOfStudent(index)} />
+      <Button onClick={() => deleteUser(name)} />
     </Wrapper>
   );
 }
@@ -25,6 +21,7 @@ UsersListItem.propTypes = {
     attendance: PropTypes.string,
     average: PropTypes.number.isRequired,
   }).isRequired,
+  deleteUser: PropTypes.func.isRequired,
 };
 
 export default UsersListItem;
