@@ -19,7 +19,7 @@ function Root() {
     <ThemeProvider theme={styledTheme}>
       <GlobalStyle />
       <Wrapper>
-        <UsersList />
+        <UsersList title="Users list" />
       </Wrapper>
     </ThemeProvider>
   );
