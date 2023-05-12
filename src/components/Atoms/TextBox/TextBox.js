@@ -1,29 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100%;
-  margin: 0 20px;
-
-  p {
-    color: ${({ theme }) => theme.colors.darkGrey};
-  }
-
-  p:first-child {
-    margin-bottom: 0;
-    color: ${({ theme }) => theme.colors.darkGrey};
-    font-size: 17px;
-    font-weight: bold;
-  }
-  p:last-child {
-    margin-top: 2px;
-    font-size: 11px;
-  }
-`;
+import PropTypes from 'prop-types';
+import { Wrapper } from './TextBox.styles';
 
 function TextBox({ name, attendance }) {
   return (
@@ -33,5 +10,10 @@ function TextBox({ name, attendance }) {
     </Wrapper>
   );
 }
+
+TextBox.propTypes = {
+  name: PropTypes.string.isRequired,
+  attendance: PropTypes.string.isRequired,
+};
 
 export default TextBox;

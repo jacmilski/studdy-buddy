@@ -1,27 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Button from 'components/Atoms/Button/Button';
+import DeleteButton from 'components/Atoms/DeleteButton/DeleteButton';
 import AverageBadge from 'components/Atoms/AverageBadge/AverageBadge';
 import TextBox from 'components/Atoms/TextBox/TextBox';
+import { UserShape } from 'types';
+import { UsersContext } from 'Providers/UsersProvider';
 import { Wrapper } from './UsersListItem.styles';
 
-function UsersListItem({ deleteUser, userData: { name, attendance = '0%', average } }) {
+function UsersListItem({ userData: { name, attendance, average } }) {
+  const { deleteUser } = useContext(UsersContext);
+
   return (
     <Wrapper>
-      <AverageBadge score={average} />
+      <AverageBadge average={average} />
       <TextBox name={name} attendance={attendance} />
-      <Button onClick={() => deleteUser(name)} />
+      <DeleteButton onClick={() => deleteUser(name)} />
     </Wrapper>
   );
 }
 
 UsersListItem.propTypes = {
+  userData: PropTypes.shape(UserShape),
+};
+
+UsersListItem.defaultProps = {
   userData: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    attendance: PropTypes.string,
-    average: PropTypes.number.isRequired,
-  }).isRequired,
-  deleteUser: PropTypes.func.isRequired,
+    name: '',
+    attendance: '0%',
+    average: '0',
+  }),
 };
 
 export default UsersListItem;

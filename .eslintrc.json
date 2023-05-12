@@ -20,6 +20,8 @@
     "react/prop-types": "warn",
     "import/prefer-default-export": "off",
     "no-nested-ternary": "warn",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "import/no-cycle": "warn",
+    "react/function-component-definition": "off"
   }
 }
