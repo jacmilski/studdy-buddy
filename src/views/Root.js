@@ -1,27 +1,32 @@
+/* eslint-disable prefer-promise-reject-errors */
 import React from 'react';
-import UsersList from 'components/Organisms/UsersList/UsersList';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'assets/styles/globalStyle';
 import styledTheme from 'assets/styles/theme';
-import 'views/App.css';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.lightGrey};
-  width: 100%;
-  height: 100vh;
-`;
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainTemplate from 'components/Templates/MainTemplate/MainTemplate';
+import AddUser from 'views/AddUser';
+import UsersProvider from 'Providers/UsersProvider';
+import Dashboard from './Dashboard';
+import { Wrapper } from './Root.styles';
 
 function Root() {
   return (
-    <ThemeProvider theme={styledTheme}>
-      <GlobalStyle />
-      <Wrapper>
-        <UsersList title="Users list" />
-      </Wrapper>
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider theme={styledTheme}>
+        <GlobalStyle />
+        <MainTemplate>
+          <UsersProvider>
+            <Wrapper>
+              <Routes>
+                <Route path="/add-user" element={<AddUser />} />
+                <Route path="/" element={<Dashboard />} />
+              </Routes>
+            </Wrapper>
+          </UsersProvider>
+        </MainTemplate>
+      </ThemeProvider>
+    </Router>
   );
 }
 

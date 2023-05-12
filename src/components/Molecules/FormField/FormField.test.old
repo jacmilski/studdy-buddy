@@ -1,0 +1,36 @@
+// @ts-nocheck
+/* eslint-disable no-restricted-globals */
+import React, { useState } from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+
+
+function InputWithButton() {
+
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (e) =>  setInputValue(e.target.value);
+
+    return(
+        <div>
+            <input value={inputValue} onChange={handleInputChange} name={name} id={name} placeholder="Enter your name" />
+            <button type="button" disabled={!inputValue}>Submit</button>
+        </div>
+    )
+}
+
+describe("Input with button", () => {
+    it("renders the component", () => {
+        render(<InputWithButton />);
+        screen.getByText('Submit');
+    });
+
+    it("Propely handles value change", () => {
+        render(<InputWithButton />);
+        const input = screen.getByPlaceholderText("Enter your name");
+        const button = screen.getByText('Submit');
+        expect(button).toBeDisabled();
+        fireEvent.change(input, {target: {value: 'Jacek'}})
+        expect(input).toHaveValue("Jacek")
+        expect(button).not.toBeDisabled();
+    })
+})
