@@ -2,7 +2,7 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-return-assign */
 import React, { useEffect, useContext, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import FormField from 'components/Molecules/FormField/FormField';
 import { Button } from 'components/Atoms/Button/Button';
 import { ViewsWrapper as Wrapper } from 'components/Organisms/ViewsWrapperStyles/ViewsWrapper.styles';
@@ -21,7 +21,8 @@ const initialFormState = [
 ];
 
 function AddUser() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
   const { formValues, handleInputChange, handleClearForm, handleThrowError, handleToggleConsent } = useForm(initialFormState);
 
   const { handleAddUser } = useContext(UsersContext);
@@ -40,7 +41,7 @@ function AddUser() {
       handleAddUser(formValues);
       handleClearForm(initialFormState);
 
-      navigate('/');
+      // navigate('/');
     } else {
       handleThrowError('You need to give consent!');
     }

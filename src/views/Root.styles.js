@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.lightGrey};
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   nav {
     position: absolute;
