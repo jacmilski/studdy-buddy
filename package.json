@@ -52,10 +52,14 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
+    "msw": "^1.2.1",
     "prettier": "2.8.8"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,json}": "prettier --cache --write"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

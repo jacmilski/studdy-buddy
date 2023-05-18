@@ -2,7 +2,7 @@
 /* eslint-disable prefer-promise-reject-errors */
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import usersData from 'data/users';
+import axios from 'axios';
 
 const initialFormState = [
   {
@@ -20,25 +20,13 @@ export const UsersContext = React.createContext({
 });
 
 function UsersProvider({ children }) {
-  const [users, setUsers] = useState(initialFormState);
-  const [, setIsLoading] = useState(false);
-
-  const mockAPI = () =>
-    new Promise((resolve, reject) => {
-      setIsLoading(true);
-      setTimeout(() => {
-        if (usersData) {
-          resolve([...usersData]);
-        } else reject({ message: 'error' });
-      }, 2000);
-    });
+  const [users, setUsers] = useState([]);
+  // const [, setIsLoading] = useState(false);
 
   useEffect(() => {
-    mockAPI()
-      .then((data) => {
-        setUsers(data);
-        setIsLoading(false);
-      })
+    axios
+      .get('/students')
+      .then(({ data: { students } }) => setUsers(students))
       .catch((err) => console.log(err.message));
   }, []);
 
