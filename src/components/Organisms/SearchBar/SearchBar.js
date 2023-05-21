@@ -1,39 +1,34 @@
-import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState } from 'react';
 import { Input } from 'components/Atoms/Input/Input';
-import { SearchContext } from 'Providers/SearchProvider';
-import { ViewsWrapper } from 'components/Organisms/ViewsWrapperStyles/ViewsWrapper.styles';
-import { Wrapper } from 'components/Molecules/UsersListItem/UsersListItem.styles';
-import { SearchBarWrapper, StatusInfo } from './SearchBar.styles';
-
-const SearchingBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const SearchingListWrapper = styled(ViewsWrapper)`
-  position: absolute;
-  top: 40px;
-  left: 320px;
-  border-radius: 0 15px 15px 15px;
-  max-width: 350px;
-  padding: 20px 30px;
-  z-index: 10;
-`;
-
-const SearchingListItem = styled(Wrapper)`
-  height: 40px;
-`;
+import debounce from 'lodash.debounce';
+import { useCombobox } from 'downshift';
+import { useStudents } from 'hooks/useStudents';
+import { SearchBarWrapper, StatusInfo, SearchWrapper, SearchResults, SearchResultsItem } from './SearchBar.styles';
 
 function SearchBar() {
-  const [sentence, setSentence] = useState('');
+  const [matchingStudents, setMatchingStudents] = useState([]);
 
-  const { filterUsers, filteredUsers } = useContext(SearchContext);
+  const { findStudents } = useStudents();
 
-  const handleChange = (e) => {
-    setSentence(e.target.value);
-    filterUsers(e.target.value);
-  };
+  const getMatchingStudents = debounce(async ({ inputValue }) => {
+    const { students } = await findStudents(inputValue);
+    setMatchingStudents(students);
+  }, 500);
+
+  const {
+    isOpen,
+    // getToggleButtonProps,
+    // getLabelProps,
+    getMenuProps,
+    getInputProps,
+    highlightedIndex,
+    getItemProps,
+    // selectedItem,
+  } = useCombobox({
+    items: matchingStudents,
+    onInputValueChange: getMatchingStudents,
+  });
 
   return (
     <SearchBarWrapper>
@@ -43,16 +38,17 @@ function SearchBar() {
           <strong>Teacher</strong>
         </p>
       </StatusInfo>
-      <SearchingBox>
-        <Input value={sentence} onChange={handleChange} />
-        {filteredUsers.length > 0 && sentence.length > 0 ? (
-          <SearchingListWrapper>
-            {filteredUsers.map((user) => (
-              <SearchingListItem>{user.name}</SearchingListItem>
+      <SearchWrapper>
+        <Input name="Search" id="Search" {...getInputProps()} placeholder="Search" />
+        <SearchResults isVisible={isOpen && matchingStudents.length} {...getMenuProps()}>
+          {isOpen &&
+            matchingStudents.map((item, index) => (
+              <SearchResultsItem isHighlighted={highlightedIndex === index} {...getItemProps({ item, index })} key={item.id}>
+                {item.name}
+              </SearchResultsItem>
             ))}
-          </SearchingListWrapper>
-        ) : null}
-      </SearchingBox>
+        </SearchResults>
+      </SearchWrapper>
     </SearchBarWrapper>
   );
 }

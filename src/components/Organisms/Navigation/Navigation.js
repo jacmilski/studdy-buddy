@@ -10,7 +10,7 @@ function Navigation() {
         </h1>
       </Logo>
       <StyledLink to="/group">Dashboard</StyledLink>
-      <StyledLink to="/add-user">Add user</StyledLink>
+      {/* <StyledLink to="/add-student">Add student</StyledLink> */}
       {/* <StyledLink to="/settings">Settings</StyledLink>
       <StyledLink to="/logout">Logout</StyledLink> */}
     </Wrapper>
