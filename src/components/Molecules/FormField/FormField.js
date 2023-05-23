@@ -5,10 +5,10 @@ import { Label } from 'components/Atoms/Label/Label';
 import { Input } from 'components/Atoms/Input/Input';
 import { Wrapper } from './FormField.styles';
 
-const FormField = React.forwardRef(({ label, id, name, value, type, ...props }, ref) => (
+const FormField = React.forwardRef(({ label, id, name, value, type, handleChange, ...props }, ref) => (
   <Wrapper>
     <Label htmlFor={id}>{label}</Label>
-    <Input ref={ref} value={value} name={name} id={id} type={type} data-testid={label} onChange={(e) => props.handleChange(e)} />
+    <Input ref={ref} value={value} name={name} id={id} type={type} data-testid={label} onChange={(e) => handleChange(e)} />
   </Wrapper>
 ));
 

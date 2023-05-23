@@ -40,7 +40,7 @@ function SearchBar() {
       </StatusInfo>
       <SearchWrapper>
         <Input name="Search" id="Search" {...getInputProps()} placeholder="Search" />
-        <SearchResults isVisible={isOpen && matchingStudents.length} {...getMenuProps()}>
+        <SearchResults isVisible={isOpen && matchingStudents.length} {...getMenuProps()} aria-label="results">
           {isOpen &&
             matchingStudents.map((item, index) => (
               <SearchResultsItem isHighlighted={highlightedIndex === index} {...getItemProps({ item, index })} key={item.id}>
