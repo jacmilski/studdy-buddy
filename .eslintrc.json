@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["react-app", "react-app/jest", "plugin:react/recommended", "airbnb", "prettier"],
+  "extends": ["react-app", "react-app/jest", "plugin:react/recommended", "airbnb", "prettier", "plugin:storybook/recommended"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -23,6 +23,7 @@
     "no-unused-vars": "warn",
     "import/no-cycle": "warn",
     "react/function-component-definition": "off",
-    "react/no-unescaped-entities": "warn"
+    "react/no-unescaped-entities": "warn",
+    "react/jsx-props-no-spreading": "warn"
   }
 }
