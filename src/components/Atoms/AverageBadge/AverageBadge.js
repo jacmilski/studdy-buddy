@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper } from './AverageBadge.styles';
 
-function AverageBadge({ average }) {
-  return <Wrapper score={average}>{average}</Wrapper>;
+function AverageBadge({ average, isBig }) {
+  return (
+    <Wrapper isBig={isBig} average={average}>
+      {average}
+    </Wrapper>
+  );
 }
 
 AverageBadge.propTypes = {

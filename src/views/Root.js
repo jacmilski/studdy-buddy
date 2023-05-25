@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable prefer-promise-reject-errors */
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
