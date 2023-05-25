@@ -18,3 +18,5 @@ export const Select = styled.select`
   border-radius: 8px;
   margin-left: 30px;
 `;
+
+export const StyledAverage = styled.p``;

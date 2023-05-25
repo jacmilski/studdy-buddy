@@ -4,17 +4,14 @@ import DeleteButton from 'components/Atoms/DeleteButton/DeleteButton';
 import AverageBadge from 'components/Atoms/AverageBadge/AverageBadge';
 import TextBox from 'components/Atoms/TextBox/TextBox';
 import { UserShape } from 'types';
-import { useStudents } from 'hooks/useStudents';
 import { Wrapper } from './StudentsListItem.styles';
 
-function StudentsListItem({ studentsData: { name, attendance, average } }) {
-  const { deleteStudent } = useStudents();
-
+function StudentsListItem({ studentsData: { name, attendance, average }, ...props }) {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <AverageBadge average={average} />
       <TextBox name={name} attendance={attendance} />
-      <DeleteButton onClick={() => deleteStudent(name)} />
+      <DeleteButton onClick={() => {}} />
     </Wrapper>
   );
 }

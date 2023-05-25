@@ -24,6 +24,7 @@
     "import/no-cycle": "warn",
     "react/function-component-definition": "off",
     "react/no-unescaped-entities": "warn",
-    "react/jsx-props-no-spreading": "warn"
+    "react/jsx-props-no-spreading": "warn",
+    "arrow-body-style": "warn"
   }
 }
