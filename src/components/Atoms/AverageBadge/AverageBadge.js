@@ -12,10 +12,12 @@ function AverageBadge({ average, isBig }) {
 
 AverageBadge.propTypes = {
   average: PropTypes.string,
+  isBig: PropTypes.bool,
 };
 
 AverageBadge.defaultProps = {
   average: '2.3',
+  isBig: false,
 };
 
 export default AverageBadge;

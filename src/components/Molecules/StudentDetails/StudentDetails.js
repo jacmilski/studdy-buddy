@@ -1,28 +1,18 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes, { shape } from 'prop-types';
-import { Title } from 'components/Atoms/Title/Title';
-import AverageBadge from 'components/Atoms/AverageBadge/AverageBadge';
-import { Wrapper } from './StudentDetails.styles';
+import { Wrapper, Label, Course } from './StudentDetails.styles';
+import DetailsInfo from '../DetailsInfo/DetailsInfo';
+import Heading from '../Heading/Heading';
 
-const StudentDetails = ({ student }) => (
+const StudentDetails = ({ student }) => {
+  return (
     <Wrapper>
-      <AverageBadge isBig>{student.average}</AverageBadge>
-      <Title>
-        {student.name} (group {student.group})
-      </Title>
+      <Heading student={student} />
+      <Label>Course:</Label>
+      <Course>{student?.course}</Course>
+      <DetailsInfo student={student} />
     </Wrapper>
   );
-
-StudentDetails.propTypes = {
-  student: PropTypes.objectOf(
-    shape({
-      id: '',
-      name: '',
-      attendance: '',
-      average: '',
-      group: '',
-    })
-  ).isRequired,
 };
 
 export default StudentDetails;

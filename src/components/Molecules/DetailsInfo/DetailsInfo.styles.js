@@ -1,26 +1,14 @@
 import styled from 'styled-components';
-import { Title } from 'components/Atoms/Title/Title';
 import { Label as Lab } from 'components/Atoms/Label/Label';
+import { Title } from 'components/Atoms/Title/Title';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  height: 400px;
-`;
-
-export const HeadingWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 70%;
-  margin-bottom: 50px;
-
-  ${Title} {
-    margin-bottom: 0;
-  }
+  height: 180px;
 `;
 
 export const Label = styled(Lab)`
@@ -28,9 +16,16 @@ export const Label = styled(Lab)`
   color: #555;
 `;
 
-export const Course = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize.xl};
+export const SubjectInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  height: 50px;
+`;
+
+export const Subject = styled.h3`
+  font-size: calc(${({ theme }) => theme.fontSize.xl} - 3px);
   font-weight: normal;
   color: ${({ theme }) => theme.colors.darkGrey};
-  margin-top: 0;
 `;

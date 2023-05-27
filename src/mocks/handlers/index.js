@@ -1,8 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable arrow-body-style */
 import { rest } from 'msw';
-import { students } from 'mocks/data/students';
+// import { students } from 'mocks/data/students';
 import { groups } from 'mocks/data/groups';
+import { db } from 'mocks/db';
 
 export const handlers = [
   rest.get('/groups', (req, res, ctx) => {
@@ -10,8 +11,15 @@ export const handlers = [
   }),
 
   rest.get('/groups/:id', (req, res, ctx) => {
+    const students = db.student.getAll();
     if (req.params.id) {
-      const matchingStudents = students.filter((student) => student.group === req.params.id);
+      const matchingStudents = db.student.findMany({
+        where: {
+          group: {
+            equals: req.params.id,
+          },
+        },
+      });
 
       return res(
         ctx.status(200),
@@ -24,10 +32,12 @@ export const handlers = [
   }),
 
   rest.get('/students', (req, res, ctx) => {
+    const students = db.student.getAll();
     return res(ctx.status(200), ctx.json({ students }));
   }),
 
   rest.post('/students/search', (req, res, ctx) => {
+    const students = db.student.getAll();
     const matchingStudents = req.body.searchPhrase
       ? students.filter((student) => student.name.toLowerCase().includes(req.body.searchPhrase.toLowerCase()))
       : [];
@@ -41,9 +51,15 @@ export const handlers = [
   }),
 
   rest.get('/students/:id', (req, res, ctx) => {
+    const students = db.student.getAll();
     if (req.params.id) {
-      const matchingStudent = students.find((student) => student.id === req.params.id);
-      // console.log(matchingStudent)
+      const matchingStudent = db.student.findFirst({
+        where: {
+          id: {
+            equals: req.params.id,
+          },
+        },
+      });
       if (!matchingStudent) {
         return res(
           ctx.status(404),
