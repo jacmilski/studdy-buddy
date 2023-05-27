@@ -5,6 +5,7 @@ import { Title } from 'components/Atoms/Title/Title';
 import { useStudents } from 'hooks/useStudents';
 import useModal from 'components/Organisms/Modal/useModal';
 import StudentDetails from 'components/Molecules/StudentDetails/StudentDetails';
+import Modal from 'components/Organisms/Modal/Modal';
 import { Wrapper, NavWrapper, Select } from './Dashboard.styles';
 
 function Dashboard() {
@@ -16,7 +17,7 @@ function Dashboard() {
 
   const { getGroups, getStudentById } = useStudents();
 
-  const { isOpen, handleOpenModal, handleCloseModal, Modal } = useModal();
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
   useEffect(() => {
     (async () => {
@@ -66,11 +67,9 @@ function Dashboard() {
         </form>
       </NavWrapper>
       <StudentsList handleOpenStudentDetails={handleOpenStudentDetails} />
-      {isOpen && currentStudent ? (
-        <Modal handleClose={handleCloseModal}>
-          <StudentDetails student={currentStudent} />
-        </Modal>
-      ) : null}
+      <Modal isOpen={isOpen} handleClose={handleCloseModal}>
+        <StudentDetails student={currentStudent} />
+      </Modal>
     </Wrapper>
   );
 }
