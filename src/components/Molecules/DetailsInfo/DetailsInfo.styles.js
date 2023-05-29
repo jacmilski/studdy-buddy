@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Label as Lab } from 'components/Atoms/Label/Label';
-import { Title } from 'components/Atoms/Title/Title';
 
 export const Wrapper = styled.div`
   display: flex;

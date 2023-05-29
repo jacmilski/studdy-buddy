@@ -28,4 +28,11 @@ export const db = factory({
       },
     ],
   },
+
+  teacher: {
+    id: primaryKey(() => '1'),
+    name: () => 'Jacek Placek',
+    login: () => 'jacek@placek.com',
+    password: () => '1234',
+  },
 });
