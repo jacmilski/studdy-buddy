@@ -5,25 +5,22 @@ import { Label } from 'components/Atoms/Label/Label';
 import { Input } from 'components/Atoms/Input/Input';
 import { Wrapper } from './FormField.styles';
 
-const FormField = React.forwardRef(({ label, id, name, value, type, handleChange, ...props }, ref) => (
-  <Wrapper>
-    <Label htmlFor={id}>{label}</Label>
-    <Input ref={ref} value={value} name={name} id={id} type={type} data-testid={label} onChange={(e) => handleChange(e)} />
-  </Wrapper>
-));
+const FormField = React.forwardRef(({ onChange, value, label, name, id, type = 'text', ...props }, ref) => {
+  return (
+    <Wrapper>
+      <Label htmlFor={id}>{label}</Label>
+      <Input name={name} id={id} type={type} value={value} onChange={onChange} data-testid={label} {...props} ref={ref} />
+    </Wrapper>
+  );
+});
 
 FormField.propTypes = {
-  label: PropTypes.string,
-  id: PropTypes.string,
-  name: PropTypes.string,
-  value: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   type: PropTypes.string,
-  handleChange: PropTypes.func,
-};
-
-FormField.defaultProps = {
-  type: 'text',
-  value: '',
+  onChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 export default FormField;
