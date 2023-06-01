@@ -21,7 +21,7 @@ export const auth = [
     if (user.password === req.body.password) {
       const token = btoa(user.login);
       localStorage.setItem('__be_token__', token);
-      return res(ctx.status(200), ctx.json(...sanitizeUser(user), token));
+      return res(ctx.status(200), ctx.json({ ...sanitizeUser(user), token }));
     }
 
     return res(
@@ -30,5 +30,13 @@ export const auth = [
         error: 'Invalid user data',
       })
     );
+  }),
+
+  rest.get('/me', (req, res, ctx) => {
+    if (authenticateRequest(req)) {
+      const user = db.teacher.getAll();
+      return res(ctx.status(200), ctx.json({ ...sanitizeUser(user) }));
+    }
+    return res(ctx.status(401));
   }),
 ];

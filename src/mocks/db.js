@@ -29,6 +29,10 @@ export const db = factory({
     ],
   },
 
+  group: {
+    id: primaryKey(String),
+  },
+
   teacher: {
     id: primaryKey(() => '1'),
     name: () => 'Jacek Placek',
