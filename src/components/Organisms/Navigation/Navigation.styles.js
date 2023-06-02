@@ -32,6 +32,7 @@ export const Logo = styled.div`
 `;
 
 export const StyledLink = styled(NavLink)`
+  cursor: pointer;
   font-weight: bold;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.darkGrey};
