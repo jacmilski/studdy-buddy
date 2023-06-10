@@ -10,6 +10,8 @@ import FormField from 'components/Molecules/FormField/FormField';
 import { Button } from 'components/Atoms/Button/Button';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'hooks/useAuth';
+import ErrorMessage from 'components/Molecules/ErrorMessage/ErrorMessage';
+import { useError } from 'hooks/useError';
 import Dashboard from './Dashboard';
 import { Wrapper } from './Root.styles';
 
@@ -53,7 +55,14 @@ const UnauthenticatedApp = () => {
 
 function Root() {
   const auth = useAuth();
-  return auth.user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
+  const { _currentValue } = useError();
+
+  return (
+    <>
+      {_currentValue?.error ? <ErrorMessage /> : null}
+      {auth.user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+    </>
+  );
 }
 
 export default Root;

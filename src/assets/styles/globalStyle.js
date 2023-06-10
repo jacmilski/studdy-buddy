@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: 'Montserrat', sans-serif;
+        overflow-Y: hidden;
     }
 
     a, button {
