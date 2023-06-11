@@ -44,7 +44,7 @@ const UnauthenticatedApp = () => {
       style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
     >
       {/* {error && <span style={{ color: 'red' }}>{error}</span>} */}
-      <FormField label="name" id="name" {...register('login', { required: true })} />
+      <FormField label="login" id="login" {...register('login', { required: true })} />
       {errors.login && <span style={{ color: 'red' }}>Login is required</span>}
       <FormField label="password" id="password" type="password" {...register('password', { required: true })} />
       {errors.password && <span style={{ color: 'red' }}>Password is required</span>}
