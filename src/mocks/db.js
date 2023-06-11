@@ -7,7 +7,7 @@ const groups = ['A', 'B', 'C'];
 
 export const db = factory({
   student: {
-    id: primaryKey(faker.datatype.uuid),
+    id: primaryKey(faker.string.uuid),
     name: () => faker.person.fullName(),
     attendance: () => `${faker.number.int({ min: 0, max: 100 })}`,
     average: () => `${faker.number.float({ min: 2, max: 5, precision: 0.1 })}`,

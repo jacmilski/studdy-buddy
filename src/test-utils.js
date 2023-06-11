@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { render } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
-import theme from 'assets/styles/theme';
+import { AppProviders } from 'Providers/AppProviders';
 
-const AllTheProviders = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+const AllTheProviders = ({ children }) => <AppProviders>{children}</AppProviders>;
 
 AllTheProviders.propTypes = {
   children: PropTypes.element.isRequired,
