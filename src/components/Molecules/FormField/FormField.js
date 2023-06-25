@@ -5,11 +5,15 @@ import { Label } from 'components/Atoms/Label/Label';
 import { Input } from 'components/Atoms/Input/Input';
 import { Wrapper } from './FormField.styles';
 
-const FormField = React.forwardRef(({ onChange, value, label, name, id, type = 'text', ...props }, ref) => {
+const FormField = React.forwardRef(({ onChange, value, label, name, isTextArea, id, type = 'text', ...props }, ref) => {
   return (
     <Wrapper>
       <Label htmlFor={id}>{label}</Label>
-      <Input name={name} id={id} type={type} value={value} onChange={onChange} data-testid={label} {...props} ref={ref} />
+      {isTextArea ? (
+        <Input as="textarea" isTextArea name={name} id={id} value={value} onChange={onChange} data-testid={label} {...props} ref={ref} />
+      ) : (
+        <Input name={name} id={id} type={type} value={value} onChange={onChange} data-testid={label} {...props} ref={ref} />
+      )}
     </Wrapper>
   );
 });

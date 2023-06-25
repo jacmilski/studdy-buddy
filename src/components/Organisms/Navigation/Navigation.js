@@ -13,6 +13,7 @@ function Navigation() {
         </h1>
       </Logo>
       <StyledLink to="/group">Dashboard</StyledLink>
+      <StyledLink to="/Notes">Notes</StyledLink>
       <StyledLink as="a" onClick={signOut}>
         Logout
       </StyledLink>

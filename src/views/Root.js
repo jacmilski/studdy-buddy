@@ -13,6 +13,7 @@ import { useAuth } from 'hooks/useAuth';
 import ErrorMessage from 'components/Molecules/ErrorMessage/ErrorMessage';
 import { useError } from 'hooks/useError';
 import Dashboard from './Dashboard';
+import Notes from './Notes';
 import { Wrapper } from './Root.styles';
 
 const AuthenticatedApp = () => {
@@ -22,6 +23,7 @@ const AuthenticatedApp = () => {
         <Routes>
           {/* <Route path="/group" element={<Dashboard />} /> */}
           <Route path="/group/:id?" element={<Dashboard />} />
+          <Route path="/notes" element={<Notes />} />
           <Route path="/" element={<Navigate replace to="/group" />} />
         </Routes>
       </Wrapper>
