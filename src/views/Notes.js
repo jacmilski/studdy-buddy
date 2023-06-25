@@ -1,4 +1,5 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import FormField from 'components/Molecules/FormField/FormField';
 import { Button } from 'components/Atoms/Button/Button';
 import styled from 'styled-components';
@@ -45,12 +46,18 @@ const Notes = () => {
 
   const dispatch = useDispatch();
 
-  const handleAddNote = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleAddNote = ({ title, content }) => {
     dispatch(
       addNote({
         id: uuid(),
-        title: `New note - ${Math.floor(Math.random() * 10)}`,
-        content: 'Some new content added',
+        title,
+        content,
       })
     );
   };
@@ -58,9 +65,12 @@ const Notes = () => {
   return (
     <Wrapper>
       <FormWrapper>
-        <StyledFormField label="Title" name="title" id="title" />
-        <StyledFormField isTextArea label="Content" name="content" id="content" />
-        <Button onClick={handleAddNote}>Add</Button>
+        <form onSubmit={handleSubmit(handleAddNote)}>
+          <StyledFormField label="Title" name="title" id="title" {...register('title', { required: true })} />
+          {errors.title && <span>This field is required</span>}
+          <StyledFormField isTextArea label="Content" name="content" id="content" {...register('content')} />
+          <Button type="submit">Add</Button>
+        </form>
       </FormWrapper>
       <NotesWrapper>
         {notes.length ? notes.map(({ title, content, id }) => <Note key={id} id={id} title={title} content={content} />) : <p>No notes so far</p>}
