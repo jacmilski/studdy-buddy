@@ -1,52 +1,36 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable default-param-last */
-import { createStore } from 'redux';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuid } from 'uuid';
 
-export const addNote = (payload) => {
-  return {
-    type: 'notes/add',
-    payload: {
-      id: uuid(),
-      ...payload,
+const initialState = [
+  {
+    id: uuid(),
+    title: 'Lorem ipsum',
+    content: 'Lorem ipsum dolor sit amet',
+  },
+];
+
+export const notesSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    addNote: (state, action) => {
+      state.push({
+        id: uuid(),
+        ...action.payload,
+      });
     },
-  };
-};
-
-export const removeNote = (payload) => {
-  return {
-    type: 'notes/remove',
-    payload,
-  };
-};
-
-const initialState = {
-  notes: [
-    {
-      id: uuid(),
-      title: 'Lorem ipsum',
-      content: 'Lorem ipsum dolor sit amet',
+    removeNote: (state, action) => {
+      return state.filter((note) => note.id !== action.payload);
     },
-  ],
-};
+  },
+});
 
-const notesReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'notes/add':
-      return {
-        ...state,
-        notes: [...state.notes, action.payload],
-      };
-    case 'notes/remove': {
-      const filteredNotes = state.notes.filter((note) => note.id !== action.payload);
-      return {
-        ...state,
-        notes: filteredNotes,
-      };
-    }
-    default:
-      return state;
-  }
-};
+export const { addNote, removeNote } = notesSlice.actions;
 
-export const store = createStore(notesReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+export const store = configureStore({
+  reducer: {
+    notes: notesSlice.reducer,
+  },
+});
+
+/* window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() */
