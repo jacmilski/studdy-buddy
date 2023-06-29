@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Title } from 'components/Atoms/Title/Title';
-import { useRemoveNoteMutation } from 'store';
+import { useRemoveNoteMutation } from 'store/api/notes';
 import { NoteWrapper, StyledDeleteButton } from './Note.styles';
 
 const Note = ({ id, title = 'Untitled', content = 'No content' }) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import StudentsList from 'components/Organisms/StudentsList/StudentsList';
 import { Title } from 'components/Atoms/Title/Title';
@@ -6,29 +6,18 @@ import { useStudents } from 'hooks/useStudents';
 import useModal from 'components/Organisms/Modal/useModal';
 import StudentDetails from 'components/Molecules/StudentDetails/StudentDetails';
 import Modal from 'components/Organisms/Modal/Modal';
+import { useGetGroupsQuery } from 'store/api/groups';
 import { Wrapper, NavWrapper, Select } from './Dashboard.styles';
 
 function Dashboard() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [groups, setGroups] = useState([]);
   const [currentStudent, setCurrentStudent] = useState([]);
-
-  const { getGroups, getStudentById } = useStudents();
+  const { getStudentById } = useStudents();
+  const { data, isLoading } = useGetGroupsQuery();
 
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await getGroups();
-        setGroups(data);
-      } catch (err) {
-        console.log(err.message);
-      }
-    })();
-  }, [getGroups]);
 
   const handleGroupChange = (e) => {
     navigate(`/group/${e.target.value}`);
@@ -44,8 +33,12 @@ function Dashboard() {
     handleOpenModal();
   };
 
-  if (!id && groups.length > 0) {
-    navigate(`/group/${groups[0]}`);
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (!id && data.groups.length > 0) {
+    navigate(`/group/${data?.groups[0]}`);
   }
 
   return (
@@ -54,11 +47,11 @@ function Dashboard() {
         <Title>Group: {id}</Title>
         <form>
           <Select onChange={handleGroupChange}>
-            <option value={`${groups[0]}`} className="option">
+            <option value={`${data.groups[0]}`} className="option">
               choose a group
             </option>
-            {groups &&
-              groups.map((item) => (
+            {data &&
+              data.groups.map((item) => (
                 <option key={item} value={item} className="option">
                   group {item}
                 </option>

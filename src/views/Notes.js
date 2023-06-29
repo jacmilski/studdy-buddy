@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from 'components/Atoms/Button/Button';
 import Note from 'components/Molecules/Note/Note';
-import { useGetNotesQuery, useAddNoteMutation } from 'store';
+import { useAddNoteMutation, useGetNotesQuery } from 'store/api/notes';
 import { Wrapper, FormWrapper, StyledFormField, NotesWrapper } from './Notes.styles';
 
 const Notes = () => {
