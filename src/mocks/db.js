@@ -39,4 +39,10 @@ export const db = factory({
     login: () => 'jacek@placek.com',
     password: () => '1234',
   },
+
+  note: {
+    id: primaryKey(faker.string.uuid),
+    title: () => faker.lorem.words({ min: 2, max: 4 }),
+    content: () => faker.lorem.words({ min: 6, max: 15 }),
+  },
 });

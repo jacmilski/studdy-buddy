@@ -1,36 +1,40 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { v4 as uuid } from 'uuid';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const initialState = [
-  {
-    id: uuid(),
-    title: 'Lorem ipsum',
-    content: 'Lorem ipsum dolor sit amet',
-  },
-];
-
-export const notesSlice = createSlice({
-  name: 'notes',
-  initialState,
-  reducers: {
-    addNote: (state, action) => {
-      state.push({
-        id: uuid(),
-        ...action.payload,
-      });
-    },
-    removeNote: (state, action) => {
-      return state.filter((note) => note.id !== action.payload);
-    },
-  },
+const notesApi = createApi({
+  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  tagTypes: ['Notes'],
+  endpoints: (builder) => ({
+    getNotes: builder.query({
+      query: () => 'notes',
+      providesTags: ['Notes'],
+    }),
+    addNote: builder.mutation({
+      query: (body) => ({
+        url: 'notes',
+        method: 'POST',
+        body: { id: uuid(), ...body },
+      }),
+      invalidatesTags: ['Notes'],
+    }),
+    removeNote: builder.mutation({
+      query: (body) => ({
+        url: 'notes',
+        method: 'DELETE',
+        body,
+      }),
+      invalidatesTags: ['Notes'],
+    }),
+  }),
 });
 
-export const { addNote, removeNote } = notesSlice.actions;
+// use[MethodName][MethodType]
+export const { useGetNotesQuery, useAddNoteMutation, useRemoveNoteMutation } = notesApi;
 
 export const store = configureStore({
   reducer: {
-    notes: notesSlice.reducer,
+    [notesApi.reducerPath]: notesApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(notesApi.middleware),
 });
-
-/* window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() */
